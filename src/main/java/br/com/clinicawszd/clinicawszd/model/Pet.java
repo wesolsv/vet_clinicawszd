@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity
@@ -16,9 +17,11 @@ public class Pet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_pet")
     private Long id;
 
     @Column(name = "nome")
+    @NotBlank(message = "Nome é obrigatório!")
     private String nome;
 
     @Column(name = "idade")
@@ -28,6 +31,7 @@ public class Pet {
     private Porte porte;
 
     @Column(name = "tipo")
+    @NotBlank(message = "Tipo é obrigatório!")
     private String tipo;
 
     @ManyToOne

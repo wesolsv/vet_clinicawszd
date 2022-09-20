@@ -10,8 +10,10 @@ public interface IAgendamento {
     public Agendamento createNewAg(Agendamento novo);
     //Read
     public ArrayList<Agendamento> getAllAg();
+
+    public Agendamento getOneAg(Long id);
     //Update
     public Agendamento updateAg(Agendamento novo);
     //Delete
-    public Agendamento deleteAg(Long id);
+    public void deleteAg(Long id);
 }

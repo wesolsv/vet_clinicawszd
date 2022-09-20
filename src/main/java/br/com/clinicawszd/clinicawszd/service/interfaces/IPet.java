@@ -10,8 +10,11 @@ public interface IPet {
     public Pet createNewPt(Pet novo);
     //Read
     public ArrayList<Pet> getAllPt();
+
+    public Pet getOnePt(Long id);
+
     //Update
     public Pet updatePt(Pet novo);
     //Delete
-    public Pet deletePt(Long id);
+    public void deletePt(Long id);
 }

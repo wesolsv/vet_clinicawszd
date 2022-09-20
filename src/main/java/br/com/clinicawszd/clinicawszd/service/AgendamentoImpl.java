@@ -1,28 +1,46 @@
 package br.com.clinicawszd.clinicawszd.service;
 
-import br.com.clinicawszd.clinicawszd.model.Pet;
-import br.com.clinicawszd.clinicawszd.service.interfaces.IPet;
+import br.com.clinicawszd.clinicawszd.model.Agendamento;
+import br.com.clinicawszd.clinicawszd.repository.AgendamentoRepository;
+import br.com.clinicawszd.clinicawszd.service.interfaces.IAgendamento;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+@Slf4j
+@Service
+public class AgendamentoImpl implements IAgendamento {
 
-public class AgendamentoImpl implements IPet {
+    @Autowired
+    private AgendamentoRepository repository;
+
     @Override
-    public Pet createNewPt(Pet novo) {
-        return null;
+    public Agendamento createNewAg(Agendamento novo) {
+        log.info("Criando novo Agendamento");
+        return repository.save(novo);
     }
 
     @Override
-    public ArrayList<Pet> getAllPt() {
-        return null;
+    public ArrayList<Agendamento> getAllAg() {
+        log.info("Lendo todos os Agendamentos");
+        return (ArrayList<Agendamento>) repository.findAll();
     }
 
     @Override
-    public Pet updatePt(Pet novo) {
-        return null;
+    public Agendamento getOneAg(Long id) {
+        log.info("Pegando um Agendamento");
+        return repository.findById(id).orElse(null);
     }
 
     @Override
-    public Pet deletePt(Long id) {
-        return null;
+    public Agendamento updateAg(Agendamento novo) {
+        log.info("Atualizado o Agendamento");
+        return repository.save(novo);
+    }
+
+    @Override
+    public void deleteAg(Long id) {
+        repository.deleteById(id);
     }
 }
