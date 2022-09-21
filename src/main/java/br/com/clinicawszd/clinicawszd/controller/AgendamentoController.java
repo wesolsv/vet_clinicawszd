@@ -1,12 +1,11 @@
-package br.com.clinicawszd.clinica.controller;
+package br.com.clinicawszd.clinicawszd.controller;
 
-import br.com.clinicawszd.clinica.model.Agendamento;
-import br.com.clinicawszd.clinica.service.AgendamentoService;
+import br.com.clinicawszd.clinicawszd.model.Agendamento;
+import br.com.clinicawszd.clinicawszd.service.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 
 @RestController

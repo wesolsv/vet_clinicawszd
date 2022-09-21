@@ -1,4 +1,4 @@
-package br.com.clinicawszd.clinica;
+package br.com.clinicawszd.clinicawszd;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

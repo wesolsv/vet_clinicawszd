@@ -1,7 +1,7 @@
-package br.com.clinicawszd.clinica.service;
+package br.com.clinicawszd.clinicawszd.service;
 
-import br.com.clinicawszd.clinica.model.Tutor;
-import br.com.clinicawszd.clinica.repository.TutorRepository;
+import br.com.clinicawszd.clinicawszd.model.Tutor;
+import br.com.clinicawszd.clinicawszd.repository.TutorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

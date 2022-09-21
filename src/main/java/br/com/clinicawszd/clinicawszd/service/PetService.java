@@ -1,7 +1,7 @@
-package br.com.clinicawszd.clinica.service;
+package br.com.clinicawszd.clinicawszd.service;
 
-import br.com.clinicawszd.clinica.model.Pet;
-import br.com.clinicawszd.clinica.repository.PetRepository;
+import br.com.clinicawszd.clinicawszd.model.Pet;
+import br.com.clinicawszd.clinicawszd.repository.PetRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
