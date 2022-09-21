@@ -1,7 +1,7 @@
 package br.com.clinicawszd.clinicawszd.controller;
 
 import br.com.clinicawszd.clinicawszd.model.Tutor;
-import br.com.clinicawszd.clinicawszd.service.TutorImpl;
+import br.com.clinicawszd.clinicawszd.service.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.List;
 public class TutorController {
 
     @Autowired
-    private TutorImpl service;
+    private TutorService service;
 
     @GetMapping
     public List<Tutor> getAllTutor(){
@@ -50,6 +50,6 @@ public class TutorController {
 
     @DeleteMapping("/{id}")
     public void deleteTutor(@PathVariable Long id){
-        service.deleteTt(id);
+        service.deleteTutorById(id);
     }
 }

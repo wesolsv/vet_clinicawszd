@@ -1,7 +1,7 @@
 package br.com.clinicawszd.clinicawszd.controller;
 
 import br.com.clinicawszd.clinicawszd.model.Pet;
-import br.com.clinicawszd.clinicawszd.service.PetImpl;
+import br.com.clinicawszd.clinicawszd.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class PetController {
 
     @Autowired
-    private PetImpl service;
+    private PetService service;
 
     @PostMapping
     public ResponseEntity<Pet> createNew(@Valid @RequestBody Pet novo){
@@ -50,6 +50,6 @@ public class PetController {
 
     @DeleteMapping("/{id}")
     public void deletePet(@PathVariable Long id){
-        service.deletePt(id);
+        service.deletePtById(id);
     }
 }
