@@ -1,7 +1,7 @@
-package br.com.clinicawszd.clinicawszd.controller;
+package br.com.clinicawszd.clinica.controller;
 
-import br.com.clinicawszd.clinicawszd.model.Tutor;
-import br.com.clinicawszd.clinicawszd.service.TutorService;
+import br.com.clinicawszd.clinica.model.Tutor;
+import br.com.clinicawszd.clinica.service.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

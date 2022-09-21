@@ -1,7 +1,7 @@
-package br.com.clinicawszd.clinicawszd.service;
+package br.com.clinicawszd.clinica.service;
 
-import br.com.clinicawszd.clinicawszd.model.Pet;
-import br.com.clinicawszd.clinicawszd.repository.PetRepository;
+import br.com.clinicawszd.clinica.model.Pet;
+import br.com.clinicawszd.clinica.repository.PetRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,6 @@ public class PetService {
 
     public Pet createNewPt(Pet novo) {
        log.info("Adiciona novo pet!");
-        System.out.println(novo);
         return  repository.save(novo);
     }
 

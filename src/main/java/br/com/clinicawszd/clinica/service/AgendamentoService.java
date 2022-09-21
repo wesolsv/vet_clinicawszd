@@ -1,7 +1,7 @@
-package br.com.clinicawszd.clinicawszd.service;
+package br.com.clinicawszd.clinica.service;
 
-import br.com.clinicawszd.clinicawszd.model.Agendamento;
-import br.com.clinicawszd.clinicawszd.repository.AgendamentoRepository;
+import br.com.clinicawszd.clinica.model.Agendamento;
+import br.com.clinicawszd.clinica.repository.AgendamentoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +16,7 @@ public class AgendamentoService {
 
     public Agendamento createNewAg(Agendamento novo) {
         log.info("Criando novo Agendamento");
+        System.out.println(novo);
         return repository.save(novo);
     }
 
