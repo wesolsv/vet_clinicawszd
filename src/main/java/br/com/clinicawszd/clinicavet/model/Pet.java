@@ -1,6 +1,6 @@
-package br.com.clinicawszd.clinicawszd.model;
+package br.com.clinicawszd.clinicavet.model;
 
-import br.com.clinicawszd.clinicawszd.enums.Porte;
+import br.com.clinicawszd.clinicavet.util.Porte;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

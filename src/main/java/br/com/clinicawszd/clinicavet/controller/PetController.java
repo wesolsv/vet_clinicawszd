@@ -1,7 +1,7 @@
-package br.com.clinicawszd.clinicawszd.controller;
+package br.com.clinicawszd.clinicavet.controller;
 
-import br.com.clinicawszd.clinicawszd.model.Pet;
-import br.com.clinicawszd.clinicawszd.service.PetService;
+import br.com.clinicawszd.clinicavet.model.Pet;
+import br.com.clinicawszd.clinicavet.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

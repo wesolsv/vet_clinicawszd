@@ -1,4 +1,4 @@
-package br.com.clinicawszd.clinicawszd.model;
+package br.com.clinicawszd.clinicavet.model;
 
 import lombok.*;
 

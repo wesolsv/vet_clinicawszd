@@ -1,6 +1,6 @@
-package br.com.clinicawszd.clinicawszd.repository;
+package br.com.clinicawszd.clinicavet.repository;
 
-import br.com.clinicawszd.clinicawszd.model.Tutor;
+import br.com.clinicawszd.clinicavet.model.Tutor;
 import org.springframework.data.repository.CrudRepository;
 
 public interface TutorRepository extends CrudRepository<Tutor, Long> {

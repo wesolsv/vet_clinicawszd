@@ -1,7 +1,7 @@
-package br.com.clinicawszd.clinicawszd.controller;
+package br.com.clinicawszd.clinicavet.controller;
 
-import br.com.clinicawszd.clinicawszd.model.Agendamento;
-import br.com.clinicawszd.clinicawszd.service.AgendamentoService;
+import br.com.clinicawszd.clinicavet.model.Agendamento;
+import br.com.clinicawszd.clinicavet.service.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
-package br.com.clinicawszd.clinicawszd.repository;
+package br.com.clinicawszd.clinicavet.repository;
 
-import br.com.clinicawszd.clinicawszd.model.Pet;
+import br.com.clinicawszd.clinicavet.model.Pet;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PetRepository extends CrudRepository<Pet, Long> {

@@ -1,4 +1,4 @@
-package br.com.clinicawszd.clinicawszd.config;
+package br.com.clinicawszd.clinicavet.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

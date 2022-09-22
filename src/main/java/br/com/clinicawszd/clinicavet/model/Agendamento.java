@@ -1,7 +1,7 @@
-package br.com.clinicawszd.clinicawszd.model;
+package br.com.clinicawszd.clinicavet.model;
 
-import br.com.clinicawszd.clinicawszd.enums.Procedimento;
-import br.com.clinicawszd.clinicawszd.enums.StatusAgendamento;
+import br.com.clinicawszd.clinicavet.util.Procedimento;
+import br.com.clinicawszd.clinicavet.util.StatusAgendamento;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
