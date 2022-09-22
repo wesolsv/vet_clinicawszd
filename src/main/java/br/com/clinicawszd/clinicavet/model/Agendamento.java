@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "agendamento")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Agendamento {
 
@@ -40,4 +39,11 @@ public class Agendamento {
     @Enumerated(EnumType.STRING)
     private StatusAgendamento agStatus = StatusAgendamento.AGENDADO;
 
+    public Agendamento(Long id, Pet idPet, LocalDateTime dtAgendamento, Procedimento procedimento, StatusAgendamento agStatus) {
+        this.id = id;
+        this.idPet = idPet;
+        this.dtAgendamento = dtAgendamento;
+        this.procedimento = procedimento;
+        this.agStatus = agStatus;
+    }
 }

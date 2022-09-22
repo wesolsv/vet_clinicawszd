@@ -2,10 +2,13 @@ package br.com.clinicawszd.clinicavet.service;
 
 import br.com.clinicawszd.clinicavet.model.Agendamento;
 import br.com.clinicawszd.clinicavet.repository.AgendamentoRepository;
+import br.com.clinicawszd.clinicavet.util.StatusAgendamento;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
+import javax.management.InstanceNotFoundException;
 import java.util.ArrayList;
 @Slf4j
 @Service
@@ -33,6 +36,12 @@ public class AgendamentoService {
     public Agendamento updateAg(Agendamento novo) {
         log.info("Atualizado o Agendamento");
         return repository.save(novo);
+    }
+
+    public Agendamento updateStatus(String status, Long id) throws ChangeSetPersister.NotFoundException {
+        Agendamento ag = repository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
+        ag.setAgStatus(StatusAgendamento.valueOf(status));
+        return repository.save(ag);
     }
 
     public void deleteAgById(Long id) {
