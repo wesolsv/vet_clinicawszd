@@ -34,12 +34,9 @@ public class TutorController {
     }
     @ApiOperation(value = "Adiciona um tutor")
     @PostMapping
-    public ResponseEntity<Tutor> createNewTutor(@Valid @RequestBody Tutor novo){
+    public ResponseEntity<Tutor> createNewTutor(@RequestBody Tutor novo){
         Tutor res = service.createNewTt(novo);
-        if(res != null){
-           return ResponseEntity.ok(res);
-        }
-        return ResponseEntity.status(203).build();
+        return ResponseEntity.ok(res);
     }
 
     @ApiOperation(value = "Altera um tutor")
