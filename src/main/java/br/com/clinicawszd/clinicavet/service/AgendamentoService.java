@@ -1,7 +1,9 @@
 package br.com.clinicawszd.clinicavet.service;
 
+import br.com.clinicawszd.clinicavet.dto.AgendamentoDTO;
 import br.com.clinicawszd.clinicavet.model.Agendamento;
 import br.com.clinicawszd.clinicavet.repository.AgendamentoRepository;
+import br.com.clinicawszd.clinicavet.util.Procedimento;
 import br.com.clinicawszd.clinicavet.util.StatusAgendamento;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +48,9 @@ public class AgendamentoService {
 
     public void deleteAgById(Long id) {
         repository.deleteById(id);
+    }
+
+    public ArrayList<AgendamentoDTO> getAllAgByYearMonth(Integer ano, Integer mes){
+        return repository.returnAgendYearMonth(ano, mes);
     }
 }

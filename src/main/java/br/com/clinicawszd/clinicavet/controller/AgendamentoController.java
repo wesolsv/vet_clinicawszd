@@ -1,7 +1,9 @@
 package br.com.clinicawszd.clinicavet.controller;
 
+import br.com.clinicawszd.clinicavet.dto.AgendamentoDTO;
 import br.com.clinicawszd.clinicavet.model.Agendamento;
 import br.com.clinicawszd.clinicavet.service.AgendamentoService;
+import br.com.clinicawszd.clinicavet.util.Procedimento;
 import br.com.clinicawszd.clinicavet.util.StatusAgendamento;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,13 @@ public class AgendamentoController {
     public ArrayList<Agendamento> getAllAg(){
         return service.getAllAg();
     }
+
+    @ApiOperation(value = "Retorna todos os agendamentos por mês")
+    @GetMapping("/anoMes")
+    public ArrayList<AgendamentoDTO> getAllAgByYearMonth(@RequestParam Integer ano, Integer mes){
+        return service.getAllAgByYearMonth(ano, mes);
+    }
+
     @ApiOperation(value = "Retorna um agendamento")
     @GetMapping("/{id}")
     public ResponseEntity<Agendamento> getOneAg(@PathVariable Long id){
@@ -40,6 +49,8 @@ public class AgendamentoController {
         }
         return ResponseEntity.notFound().build();
     }
+
+
     @ApiOperation(value = "Altera um agendamento")
     @PutMapping
     public ResponseEntity<Agendamento> updateAg(@RequestBody  Agendamento novo){
