@@ -3,7 +3,6 @@ package br.com.clinicawszd.clinicavet.model;
 import br.com.clinicawszd.clinicavet.util.Procedimento;
 import br.com.clinicawszd.clinicavet.util.StatusAgendamento;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

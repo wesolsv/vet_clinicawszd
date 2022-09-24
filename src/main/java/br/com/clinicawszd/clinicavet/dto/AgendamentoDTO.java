@@ -2,7 +2,6 @@ package br.com.clinicawszd.clinicavet.dto;
 
 import br.com.clinicawszd.clinicavet.util.Procedimento;
 import br.com.clinicawszd.clinicavet.util.StatusAgendamento;
-import jdk.jshell.Snippet;
 import lombok.*;
 
 import javax.persistence.EnumType;

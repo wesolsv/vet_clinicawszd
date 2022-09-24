@@ -1,5 +1,6 @@
 package br.com.clinicawszd.clinicavet.service;
 
+import br.com.clinicawszd.clinicavet.exceptions.ObjectNotFoundException;
 import br.com.clinicawszd.clinicavet.model.Pet;
 import br.com.clinicawszd.clinicavet.repository.PetRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -26,16 +27,19 @@ public class PetService {
 
     public Pet getOnePt(Long id){
         log.info("Pegar um único pet!");
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(
+                () -> new ObjectNotFoundException("Objeto não encontrado id = " + id + " Tipo " + Pet.class.getName()));
     }
 
     public Pet updatePt(Pet novo) {
-        log.info("Atualiza pet!");
+        getOnePt(novo.getId());
+        log.info("Atualizando um pet!");
         return repository.save(novo);
     }
 
     public void deletePtById(Long id){
-        log.info("Deleta Pet");
+        getOnePt(id);
+        log.info("Deletando um Pet");
         repository.deleteById(id);
     };
 }
