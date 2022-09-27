@@ -2,6 +2,7 @@ package br.com.clinicawszd.clinicavet.controller;
 
 import br.com.clinicawszd.clinicavet.model.Pet;
 import br.com.clinicawszd.clinicavet.service.PetService;
+import br.com.clinicawszd.clinicavet.service.TutorService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,13 @@ public class PetController {
 
     @Autowired
     private PetService service;
+    @Autowired
+    private TutorService tutorService;
 
     @ApiOperation(value = "Adiciona um pet")
     @PostMapping
     public ResponseEntity<Pet> createNew(@Valid @RequestBody Pet novo){
+        tutorService.getOneTutor(novo.getTutor().getId());
         Pet res = service.createNewPt(novo);
         if(res != null){
             return ResponseEntity.ok(res);
