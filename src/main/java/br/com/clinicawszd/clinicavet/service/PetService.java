@@ -2,7 +2,6 @@ package br.com.clinicawszd.clinicavet.service;
 
 import br.com.clinicawszd.clinicavet.exceptions.ObjectNotFoundException;
 import br.com.clinicawszd.clinicavet.model.Pet;
-import br.com.clinicawszd.clinicavet.model.Tutor;
 import br.com.clinicawszd.clinicavet.repository.PetRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -20,14 +20,16 @@ public class Tutor {
 
     @Column(name = "nome")
     @NotBlank(message = "Nome é obrigatório!")
+    @Size(min=3, message = "O nome do tutor deve ter no minimo 3 caracteres")
     private String nome;
 
     @Column(name = "telefone")
-    @Size(min=10, max = 15, message = "O telefone do tutor deve ter min 10 e max 11 caracteres")
+    @Size(min=10, max = 15, message = "O telefone do tutor deve ter min 10 e max 15 caracteres")
     private String telefone;
 
     @Column(name = "cpf")
     @NotBlank(message = "CPF é obrigatório")
+    @Size(min=11,max = 11, message = "O CPF deve ter no min 11 e max 15 caracteres")
     private String cpf;
 
     @Column(name = "email")

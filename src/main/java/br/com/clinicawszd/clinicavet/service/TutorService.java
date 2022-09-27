@@ -4,16 +4,11 @@ import br.com.clinicawszd.clinicavet.exceptions.BadRequestException;
 import br.com.clinicawszd.clinicavet.exceptions.ObjectNotFoundException;
 import br.com.clinicawszd.clinicavet.model.Tutor;
 import br.com.clinicawszd.clinicavet.repository.TutorRepository;
-import br.com.clinicawszd.clinicavet.util.FormatNumber;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -24,7 +19,10 @@ public class TutorService {
 
     public Tutor createNewTt(Tutor novo) {
         log.info("Adicionando Novo tutor!");
-        FormatNumber f = new FormatNumber();
+
+        novo.setTelefone(novo.getTelefone().replaceAll("\\D", ""));
+        novo.setCpf(novo.getCpf().replaceAll("\\D", ""));
+
 
         Tutor tutor = new Tutor.Builder()
                 .nome(novo.getNome())
@@ -33,8 +31,7 @@ public class TutorService {
                 .email(novo.getEmail())
                 .endereco(novo.getEndereco()).build();
 
-        tutor.setTelefone(f.formatarNumero("telefone", novo.getTelefone()));
-        tutor.setCpf(f.formatarNumero("cpf", novo.getCpf()));
+        System.out.println(tutor);
 
         try{
             repository.save(tutor);

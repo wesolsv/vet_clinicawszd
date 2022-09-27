@@ -8,12 +8,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AgendamentoDTO {
-
-//    @NonNull
-//    private Integer ano;
-//    @NonNull
-//    private Integer mes;
 
     @Enumerated(EnumType.STRING)
     private Procedimento procedimento;
@@ -22,13 +19,4 @@ public class AgendamentoDTO {
     private StatusAgendamento status;
 
     private Long total;
-
-    public AgendamentoDTO() {
-    }
-
-    public AgendamentoDTO(Procedimento procedimento, StatusAgendamento status, Long total) {
-        this.procedimento = procedimento;
-        this.status = status;
-        this.total = total;
-    }
 }

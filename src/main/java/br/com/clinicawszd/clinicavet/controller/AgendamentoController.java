@@ -3,8 +3,6 @@ package br.com.clinicawszd.clinicavet.controller;
 import br.com.clinicawszd.clinicavet.dto.AgendamentoDTO;
 import br.com.clinicawszd.clinicavet.model.Agendamento;
 import br.com.clinicawszd.clinicavet.service.AgendamentoService;
-import br.com.clinicawszd.clinicavet.util.Procedimento;
-import br.com.clinicawszd.clinicavet.util.StatusAgendamento;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
