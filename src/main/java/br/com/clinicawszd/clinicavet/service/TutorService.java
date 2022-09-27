@@ -25,7 +25,14 @@ public class TutorService {
     public Tutor createNewTt(Tutor novo) {
         log.info("Adicionando Novo tutor!");
         FormatNumber f = new FormatNumber();
-        Tutor tutor = novo;
+
+        Tutor tutor = new Tutor.Builder()
+                .nome(novo.getNome())
+                .telefone(novo.getTelefone())
+                .cpf(novo.getCpf())
+                .email(novo.getEmail())
+                .endereco(novo.getEndereco()).build();
+
         tutor.setTelefone(f.formatarNumero("telefone", novo.getTelefone()));
         tutor.setCpf(f.formatarNumero("cpf", novo.getCpf()));
 

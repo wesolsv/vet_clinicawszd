@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "tutor")
 @NoArgsConstructor
-@AllArgsConstructor
 public class Tutor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,4 +36,44 @@ public class Tutor {
     @Column(name = "endereco")
     private String endereco;
 
+    public static class Builder{
+        private String nome;
+        private String telefone;
+        private String cpf;
+        private String email;
+        private String endereco;
+
+        public Builder nome(String nome){
+            this.nome = nome;
+            return this;
+        }
+        public Builder telefone(String telefone){
+            this.telefone = telefone;
+            return this;
+        }
+        public Builder cpf(String cpf){
+            this.cpf = cpf;
+            return this;
+        }
+        public Builder email(String email){
+            this.email = email;
+            return this;
+        }
+        public Builder endereco(String endereco) {
+            this.endereco = endereco;
+            return this;
+        }
+
+        public Tutor build() {
+            return new Tutor(this);
+        }
+    }
+
+    private Tutor(Builder builder){
+        nome = builder.nome;
+        telefone = builder.telefone;
+        cpf = builder.cpf;
+        email = builder.email;
+        endereco = builder.endereco;
+    }
 }
