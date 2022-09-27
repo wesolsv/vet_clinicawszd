@@ -20,18 +20,12 @@ public class TutorService {
     public Tutor createNewTt(Tutor novo) {
         log.info("Adicionando Novo tutor!");
 
-        novo.setTelefone(novo.getTelefone().replaceAll("\\D", ""));
-        novo.setCpf(novo.getCpf().replaceAll("\\D", ""));
-
-
         Tutor tutor = new Tutor.Builder()
                 .nome(novo.getNome())
-                .telefone(novo.getTelefone())
-                .cpf(novo.getCpf())
+                .telefone(novo.getTelefone().replaceAll("\\D", ""))
+                .cpf(novo.getCpf().replaceAll("\\D", ""))
                 .email(novo.getEmail())
                 .endereco(novo.getEndereco()).build();
-
-        System.out.println(tutor);
 
         try{
             repository.save(tutor);

@@ -21,7 +21,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 //        if(errorDescription == null) errorDescription = e.toString();
 
         ErrorMessage errorMessage = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), new Date(), e.getMessage());
-
         return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

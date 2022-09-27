@@ -32,8 +32,8 @@ public class AgendamentoController {
         return service.getAllAg();
     }
 
-    @ApiOperation(value = "Retorna todos os agendamentos por mês")
-    @GetMapping("/anoMes")
+    @ApiOperation(value = "Retorna todos os agendamentos por ano e mês")
+    @GetMapping("/ano/mes")
     public ArrayList<AgendamentoDTO> getAllAgByYearMonth(@RequestParam Integer ano, Integer mes){
         return service.getAllAgByYearMonth(ano, mes);
     }
