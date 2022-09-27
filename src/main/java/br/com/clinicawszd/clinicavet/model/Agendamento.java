@@ -3,6 +3,8 @@ package br.com.clinicawszd.clinicavet.model;
 import br.com.clinicawszd.clinicavet.util.Procedimento;
 import br.com.clinicawszd.clinicavet.util.StatusAgendamento;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "agendamento")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Agendamento {
 
     @Id
@@ -22,7 +25,8 @@ public class Agendamento {
 
     @ManyToOne
     @JoinColumn(name = "id_pet")
-    private Pet idPet;
+    @JsonIgnoreProperties("agendamentos")
+    private Pet pet;
 
     @Column(name = "dt_criacao")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss", shape= JsonFormat.Shape.STRING)
@@ -38,11 +42,4 @@ public class Agendamento {
     @Enumerated(EnumType.STRING)
     private StatusAgendamento agStatus = StatusAgendamento.AGENDADO;
 
-    public Agendamento(Long id, Pet idPet, LocalDateTime dtAgendamento, Procedimento procedimento, StatusAgendamento agStatus) {
-        this.id = id;
-        this.idPet = idPet;
-        this.dtAgendamento = dtAgendamento;
-        this.procedimento = procedimento;
-        this.agStatus = agStatus;
-    }
 }

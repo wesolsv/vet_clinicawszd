@@ -1,12 +1,14 @@
 package br.com.clinicawszd.clinicavet.model;
 
 import br.com.clinicawszd.clinicavet.util.Porte;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Data
 @Entity
@@ -36,6 +38,10 @@ public class Pet {
 
     @ManyToOne
     @JoinColumn(name = "id_tutor")
-    private Tutor idTutor;
+    private Tutor tutor;
+
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("pet")
+    private List<Agendamento> agendamentos;
 
 }
