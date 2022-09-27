@@ -1,23 +1,42 @@
 package br.com.clinicawszd.clinicavet.service;
 
 import br.com.clinicawszd.clinicavet.exceptions.ObjectNotFoundException;
+import br.com.clinicawszd.clinicavet.model.Agendamento;
 import br.com.clinicawszd.clinicavet.model.Pet;
+import br.com.clinicawszd.clinicavet.repository.AgendamentoRepository;
 import br.com.clinicawszd.clinicavet.repository.PetRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Slf4j
 @Service
 public class PetService {
 
     @Autowired
     private PetRepository repository;
+    @Autowired
+    private AgendamentoRepository agendamentoRepository;
 
     public Pet createNewPt(Pet novo) {
        log.info("Adiciona novo pet!");
-        return  repository.save(novo);
+       List<Agendamento> listaAg = new ArrayList<>(novo.getAgendamentos());
+
+       if(!listaAg.isEmpty()){
+           novo.getAgendamentos().clear();
+           Pet pet = repository.save(novo);
+           for(Agendamento ag : listaAg){
+               ag.setPet(pet);
+               agendamentoRepository.save(ag);
+           }
+           pet.setAgendamentos(listaAg);
+           return pet;
+       }
+       return  repository.save(novo);
     }
 
     public ArrayList<Pet> getAllPt() {
