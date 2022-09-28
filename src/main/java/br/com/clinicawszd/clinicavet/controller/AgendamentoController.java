@@ -71,7 +71,9 @@ public class AgendamentoController {
 
     @ApiOperation(value = "Deleta um agendamento")
     @DeleteMapping("/{id}")
-    public void deleteAg(@PathVariable Long id){
-        service.deleteAgById(id);
+    @ResponseBody
+    public String deleteAg(@PathVariable Long id){
+        ResponseEntity.status(401);
+        return "Não é possível deletar um agendamento, é importante manter o histórico";
     }
 }

@@ -2,13 +2,17 @@ package br.com.clinicawszd.clinicavet.service;
 
 import br.com.clinicawszd.clinicavet.exceptions.BadRequestException;
 import br.com.clinicawszd.clinicavet.exceptions.ObjectNotFoundException;
+import br.com.clinicawszd.clinicavet.model.Pet;
 import br.com.clinicawszd.clinicavet.model.Tutor;
+import br.com.clinicawszd.clinicavet.repository.PetRepository;
 import br.com.clinicawszd.clinicavet.repository.TutorRepository;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -16,6 +20,9 @@ public class TutorService {
 
     @Autowired
     private TutorRepository repository;
+
+    @Autowired
+    private PetRepository petRepository;
 
     public Tutor createNewTt(Tutor novo) {
         log.info("Adicionando Novo tutor!");
@@ -51,9 +58,18 @@ public class TutorService {
         return repository.save(novo);
     }
 
-    public void deleteTutorById(Long id) {
+    public void deleteTutorById(Long id){
         log.info("Removendo um tutor!");
         getOneTutor(id);
+
+        List<Pet> pets = (List<Pet>) petRepository.findAll();
+
+        for(Pet p : pets){
+            if(p.getTutor().getId() == id){
+                throw new BadRequestException("Não é possível excluir um tutor que tem um pet");
+            }
+        }
+
         repository.deleteById(id);
     }
 }
