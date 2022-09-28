@@ -24,6 +24,7 @@ public class PetService {
 
     public Pet createNewPt(Pet novo) {
        log.info("Adiciona novo pet!");
+
        List<Agendamento> listaAg = new ArrayList<>(novo.getAgendamentos());
 
        if(!listaAg.isEmpty()){
