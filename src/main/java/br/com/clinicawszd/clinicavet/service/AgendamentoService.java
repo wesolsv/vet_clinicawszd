@@ -21,28 +21,23 @@ public class AgendamentoService {
         log.info("Criando novo Agendamento");
         return repository.save(novo);
     }
-
     public ArrayList<Agendamento> getAllAg() {
         log.info("Lendo todos os Agendamentos");
         return (ArrayList<Agendamento>) repository.findAll();
     }
-
     public Agendamento getOneAg(Long id) {
         log.info("Pegando um Agendamento");
         return repository.findById(id).orElseThrow(
                 () -> new ObjectNotFoundException("Objeto não encontrado id = " + id + " Tipo " + Agendamento.class.getName()));
     }
-
     public Agendamento updateAg(Agendamento novo) {
+        getOneAg(novo.getId());
         log.info("Atualizado o Agendamento");
         return repository.save(novo);
     }
 
     public Agendamento updateStatus(String status, Long id) {
-
-        Agendamento ag = repository.findById(id).orElseThrow(
-                () -> new ObjectNotFoundException("Objeto não encontrado id = " + id + " Tipo " + Agendamento.class.getName()));
-
+        Agendamento ag = getOneAg(id);
         ag.setAgStatus(StatusAgendamento.valueOf(status));
 
         return repository.save(ag);

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -25,16 +24,16 @@ public class PetService {
     public Pet createNewPt(Pet novo) {
        log.info("Adiciona novo pet!");
 
-       List<Agendamento> listaAg = new ArrayList<>(novo.getAgendamentos());
+       List<Agendamento> lista = new ArrayList<>(novo.getAgendamentos());
 
-       if(!listaAg.isEmpty()){
+       if(!lista.isEmpty()){
            novo.getAgendamentos().clear();
            Pet pet = repository.save(novo);
-           for(Agendamento ag : listaAg){
+           for(Agendamento ag : lista){
                ag.setPet(pet);
                agendamentoRepository.save(ag);
            }
-           pet.setAgendamentos(listaAg);
+           pet.setAgendamentos(lista);
            return pet;
        }
        return  repository.save(novo);
@@ -46,7 +45,7 @@ public class PetService {
     }
 
     public Pet getOnePt(Long id){
-        log.info("Pegar um único pet!");
+        log.info("Pegando um único pet!");
         return repository.findById(id).orElseThrow(
                 () -> new ObjectNotFoundException("Objeto não encontrado id = " + id + " Tipo " + Pet.class.getName()));
     }
