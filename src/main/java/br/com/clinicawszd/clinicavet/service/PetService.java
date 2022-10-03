@@ -50,8 +50,9 @@ public class PetService {
                 () -> new ObjectNotFoundException("Objeto não encontrado id = " + id + " Tipo " + Pet.class.getName()));
     }
 
-    public Pet updatePt(Pet novo) {
-        getOnePt(novo.getId());
+    public Pet updatePt(Long id, Pet novo) {
+        getOnePt(id);
+        novo.setId(id);
         log.info("Atualizando um pet!");
         return repository.save(novo);
     }

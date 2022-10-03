@@ -40,9 +40,9 @@ public class TutorController {
     }
 
     @ApiOperation(value = "Altera um tutor")
-    @PutMapping
-    public ResponseEntity<Tutor> updateTutor(@Valid @RequestBody Tutor novo){
-        Tutor res = service.updateTt(novo);
+    @PutMapping("/{id}")
+    public ResponseEntity<Tutor> updateTutor(@PathVariable Long id, @RequestBody Tutor novo){
+        Tutor res = service.updateTt(id, novo);
         if(res != null){
             return ResponseEntity.ok(res);
         }

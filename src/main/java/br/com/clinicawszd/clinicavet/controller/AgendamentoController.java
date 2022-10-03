@@ -50,17 +50,17 @@ public class AgendamentoController {
 
 
     @ApiOperation(value = "Altera um agendamento")
-    @PutMapping
-    public ResponseEntity<Agendamento> updateAg(@RequestBody  Agendamento novo){
-        Agendamento res = service.updateAg(novo);
+    @PutMapping("/{id}")
+    public ResponseEntity<Agendamento> updateAg(@PathVariable Long id, @RequestBody  Agendamento novo){
+        Agendamento res = service.updateAg(id, novo);
         if(res != null){
             return ResponseEntity.ok(res);
         }
         return ResponseEntity.notFound().build();
     }
     @ApiOperation(value = "Altera o status de um agendamento")
-    @PatchMapping
-    public ResponseEntity<String> updateStatus(@RequestParam Long id, String status) throws ChangeSetPersister.NotFoundException {
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> updateStatus(@PathVariable Long id, @RequestBody String status) throws ChangeSetPersister.NotFoundException {
         Agendamento res = service.updateStatus(status, id);
 
         if(res != null){

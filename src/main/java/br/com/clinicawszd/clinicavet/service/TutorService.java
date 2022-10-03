@@ -52,9 +52,10 @@ public class TutorService {
                 () -> new ObjectNotFoundException("Objeto não encontrado id = " + id + " Tipo " + Tutor.class.getName()));
     }
 
-    public Tutor updateTt(Tutor novo) {
-        getOneTutor(novo.getId());
-        log.info("Alterando tutor id = " + novo.getId());
+    public Tutor updateTt(Long id, Tutor novo) {
+        getOneTutor(id);
+        novo.setId(id);
+        log.info("Alterando tutor id = " + id);
         return repository.save(novo);
     }
 

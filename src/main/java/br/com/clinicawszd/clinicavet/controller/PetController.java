@@ -47,9 +47,9 @@ public class PetController {
     }
 
     @ApiOperation(value = "Altera um pet")
-    @PutMapping
-    public ResponseEntity<Pet> updatePet(@Valid @RequestBody  Pet novo){
-        Pet res = service.updatePt(novo);
+    @PutMapping("/{id}")
+    public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody  Pet novo){
+        Pet res = service.updatePt(id, novo);
         if(res != null){
             return ResponseEntity.ok(res);
         }

@@ -30,8 +30,9 @@ public class AgendamentoService {
         return repository.findById(id).orElseThrow(
                 () -> new ObjectNotFoundException("Objeto não encontrado id = " + id + " Tipo " + Agendamento.class.getName()));
     }
-    public Agendamento updateAg(Agendamento novo) {
-        getOneAg(novo.getId());
+    public Agendamento updateAg(Long id, Agendamento novo) {
+        getOneAg(id);
+        novo.setId(id);
         log.info("Atualizado o Agendamento");
         return repository.save(novo);
     }
