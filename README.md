@@ -31,7 +31,3 @@ Para executar o projeto: mvn spring-boot:run
 * PUT  /api/v1/agendamento          - Altera um agendamento
 * PATC /api/v1/agendamento          - Altera o status de um agendamento
 * DEL  /api/v1/agendamento/{id}     - Deleta um agendamento (Desabilitado)
-
-[ScriptCreateTabelasTutorPetAgendamento.txt](https://github.com/wesolsv/vet_clinicawszd/files/9660570/ScriptCreateTabelasTutorPetAgendamento.txt)
-
-[Script para popular as tabelas.txt](https://github.com/wesolsv/vet_clinicawszd/files/9660571/Script.para.popular.as.tabelas.txt)
