@@ -4,8 +4,10 @@ import br.com.clinicawszd.clinicavet.model.Tutor;
 import br.com.clinicawszd.clinicavet.service.TutorService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -26,27 +28,19 @@ public class TutorController {
     @ApiOperation(value = "Retorna um tutor")
     @GetMapping("/{id}")
     public ResponseEntity<Tutor> getTutor(@PathVariable Long id){
-        Tutor res = service.getOneTutor(id);
-        if(res != null){
-            return ResponseEntity.ok(res);
-        }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(service.getOneTutor(id));
     }
+
     @ApiOperation(value = "Adiciona um tutor")
     @PostMapping
     public ResponseEntity<Tutor> createNewTutor(@RequestBody Tutor novo){
-        Tutor res = service.createNewTt(novo);
-        return ResponseEntity.ok(res);
+        return new ResponseEntity<Tutor>(service.createNewTt(novo), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Altera um tutor")
     @PutMapping("/{id}")
     public ResponseEntity<Tutor> updateTutor(@PathVariable Long id, @RequestBody Tutor novo){
-        Tutor res = service.updateTt(id, novo);
-        if(res != null){
-            return ResponseEntity.ok(res);
-        }
-        return ResponseEntity.badRequest().build();
+        return new ResponseEntity<Tutor>(service.updateTt(id, novo), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Exclui um tutor")

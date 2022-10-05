@@ -33,7 +33,6 @@ public class TutorService {
                 .cpf(novo.getCpf().replaceAll("\\D", ""))
                 .email(novo.getEmail())
                 .endereco(novo.getEndereco()).build();
-
         try{
             repository.save(tutor);
         }catch (BadRequestException e){
@@ -49,7 +48,7 @@ public class TutorService {
     public Tutor getOneTutor(Long id) {
         log.info("Pegando um tutor!");
         return repository.findById(id).orElseThrow(
-                () -> new ObjectNotFoundException("Objeto não encontrado id = " + id + " Tipo " + Tutor.class.getName()));
+                () -> new ObjectNotFoundException("Tutor não encontrado id = " + id + " Tipo " + Tutor.class.getName()));
     }
 
     public Tutor updateTt(Long id, Tutor novo) {

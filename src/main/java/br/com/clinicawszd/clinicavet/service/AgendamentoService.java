@@ -17,7 +17,7 @@ public class AgendamentoService {
     @Autowired
     private AgendamentoRepository repository;
 
-    public Agendamento createNewAg(Agendamento novo) {
+    public Agendamento createdNewAg(Agendamento novo) {
         log.info("Criando novo Agendamento");
         return repository.save(novo);
     }
@@ -28,7 +28,7 @@ public class AgendamentoService {
     public Agendamento getOneAg(Long id) {
         log.info("Pegando um Agendamento");
         return repository.findById(id).orElseThrow(
-                () -> new ObjectNotFoundException("Objeto não encontrado id = " + id + " Tipo " + Agendamento.class.getName()));
+                () -> new ObjectNotFoundException("Agendamento não encontrado id = " + id + " Tipo " + Agendamento.class.getName()));
     }
     public Agendamento updateAg(Long id, Agendamento novo) {
         getOneAg(id);
@@ -40,7 +40,6 @@ public class AgendamentoService {
     public Agendamento updateStatus(String status, Long id) {
         Agendamento ag = getOneAg(id);
         ag.setAgStatus(StatusAgendamento.valueOf(status));
-
         return repository.save(ag);
     }
 

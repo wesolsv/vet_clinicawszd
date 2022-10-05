@@ -6,6 +6,7 @@ import br.com.clinicawszd.clinicavet.service.AgendamentoService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,11 +21,7 @@ public class AgendamentoController {
     @ApiOperation(value = "Adiciona um agendamento")
     @PostMapping
     private ResponseEntity<Agendamento> createdNewAg(@RequestBody Agendamento novo){
-        Agendamento res = service.createNewAg(novo);
-        if(res != null){
-            return ResponseEntity.ok(res);
-        }
-        return ResponseEntity.badRequest().build();
+        return new ResponseEntity<Agendamento>(service.createdNewAg(novo), HttpStatus.CREATED);
     }
     @ApiOperation(value = "Retorna todos os agendamentos")
     @GetMapping
@@ -41,32 +38,20 @@ public class AgendamentoController {
     @ApiOperation(value = "Retorna um agendamento")
     @GetMapping("/{id}")
     public ResponseEntity<Agendamento> getOneAg(@PathVariable Long id){
-        Agendamento res = service.getOneAg(id);
-        if(res != null){
-            return ResponseEntity.ok(res);
-        }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(service.getOneAg(id));
     }
-
 
     @ApiOperation(value = "Altera um agendamento")
     @PutMapping("/{id}")
     public ResponseEntity<Agendamento> updateAg(@PathVariable Long id, @RequestBody  Agendamento novo){
-        Agendamento res = service.updateAg(id, novo);
-        if(res != null){
-            return ResponseEntity.ok(res);
-        }
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<Agendamento>(service.updateAg(id, novo), HttpStatus.CREATED);
     }
     @ApiOperation(value = "Altera o status de um agendamento")
     @PatchMapping("/{id}")
     public ResponseEntity<String> updateStatus(@PathVariable Long id, @RequestBody String status) throws ChangeSetPersister.NotFoundException {
         Agendamento res = service.updateStatus(status, id);
-
-        if(res != null){
-            return  ResponseEntity.ok("Status de agendamento alterado para " + status);
-        }
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<String>("Status de agendamento alterado para " + status,
+                HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Deleta um agendamento")

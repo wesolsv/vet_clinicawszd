@@ -47,7 +47,7 @@ public class PetService {
     public Pet getOnePt(Long id){
         log.info("Pegando um único pet!");
         return repository.findById(id).orElseThrow(
-                () -> new ObjectNotFoundException("Objeto não encontrado id = " + id + " Tipo " + Pet.class.getName()));
+                () -> new ObjectNotFoundException("Pet não encontrado id = " + id + " Tipo " + Pet.class.getName()));
     }
 
     public Pet updatePt(Long id, Pet novo) {

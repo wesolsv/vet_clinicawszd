@@ -5,6 +5,7 @@ import br.com.clinicawszd.clinicavet.service.PetService;
 import br.com.clinicawszd.clinicavet.service.TutorService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +25,7 @@ public class PetController {
     @PostMapping
     public ResponseEntity<Pet> createNew(@Valid @RequestBody Pet novo){
         tutorService.getOneTutor(novo.getTutor().getId());
-        Pet res = service.createNewPt(novo);
-        if(res != null){
-            return ResponseEntity.ok(res);
-        }
-        return ResponseEntity.status(203).build();
+        return new ResponseEntity<Pet>(service.createNewPt(novo), HttpStatus.CREATED);
     }
     @ApiOperation(value = "Retorna todos os pets")
     @GetMapping
@@ -39,21 +36,14 @@ public class PetController {
     @ApiOperation(value = "Retorna um pet")
     @GetMapping("/{id}")
     public ResponseEntity<Pet> getOnePet(@PathVariable Long id){
-        Pet res = service.getOnePt(id);
-        if(res != null){
-            return ResponseEntity.ok(res);
-        }
-        return ResponseEntity.notFound().build();
+       return ResponseEntity.ok(service.getOnePt(id));
+
     }
 
     @ApiOperation(value = "Altera um pet")
     @PutMapping("/{id}")
     public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody  Pet novo){
-        Pet res = service.updatePt(id, novo);
-        if(res != null){
-            return ResponseEntity.ok(res);
-        }
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<Pet>(service.updatePt(id, novo), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Excluí um pet")
