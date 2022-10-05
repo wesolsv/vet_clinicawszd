@@ -1,6 +1,7 @@
 package br.com.clinicawszd.clinicavet.service;
 
 import br.com.clinicawszd.clinicavet.dto.AgendamentoDTO;
+import br.com.clinicawszd.clinicavet.exceptions.BadRequestException;
 import br.com.clinicawszd.clinicavet.exceptions.ObjectNotFoundException;
 import br.com.clinicawszd.clinicavet.model.Agendamento;
 import br.com.clinicawszd.clinicavet.repository.AgendamentoRepository;
@@ -19,7 +20,13 @@ public class AgendamentoService {
 
     public Agendamento createdNewAg(Agendamento novo) {
         log.info("Criando novo Agendamento");
-        return repository.save(novo);
+        Agendamento ag;
+        try{
+            ag = repository.save(novo);
+        }catch (BadRequestException e){
+            throw new BadRequestException("Falha ao criar Agendamento, verifique o payload");
+        }
+        return ag;
     }
     public ArrayList<Agendamento> getAllAg() {
         log.info("Lendo todos os Agendamentos");

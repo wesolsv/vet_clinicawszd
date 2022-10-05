@@ -1,5 +1,6 @@
 package br.com.clinicawszd.clinicavet.service;
 
+import br.com.clinicawszd.clinicavet.exceptions.BadRequestException;
 import br.com.clinicawszd.clinicavet.exceptions.ObjectNotFoundException;
 import br.com.clinicawszd.clinicavet.model.Agendamento;
 import br.com.clinicawszd.clinicavet.model.Pet;
@@ -24,18 +25,24 @@ public class PetService {
     public Pet createNewPt(Pet novo) {
        log.info("Adiciona novo pet!");
 
-       List<Agendamento> lista = new ArrayList<>(novo.getAgendamentos());
+       try{
+           List<Agendamento> lista = new ArrayList<>(novo.getAgendamentos());
 
-       if(!lista.isEmpty()){
-           novo.getAgendamentos().clear();
-           Pet pet = repository.save(novo);
-           for(Agendamento ag : lista){
-               ag.setPet(pet);
-               agendamentoRepository.save(ag);
+           if(!lista.isEmpty()){
+               novo.getAgendamentos().clear();
+               Pet pet = repository.save(novo);
+               for(Agendamento ag : lista){
+                   ag.setPet(pet);
+                   agendamentoRepository.save(ag);
+               }
+               pet.setAgendamentos(lista);
+               return pet;
            }
-           pet.setAgendamentos(lista);
-           return pet;
        }
+       catch (BadRequestException e){
+           throw new BadRequestException("Erro ao adicionar pet, verifique o payload");
+       }
+
        return  repository.save(novo);
     }
 
