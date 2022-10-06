@@ -41,7 +41,7 @@ public class Agendamento {
     private Procedimento procedimento;
 
     @Enumerated(EnumType.STRING)
-    private StatusAgendamento agStatus = StatusAgendamento.AGENDADO;
+    private StatusAgendamento agStatus;
 
 
     public static class Builder{

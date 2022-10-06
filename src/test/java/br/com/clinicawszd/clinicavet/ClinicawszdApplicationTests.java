@@ -195,9 +195,69 @@ class ClinicawszdApplicationTests {
 
 		deleteEntity("pet", agendamento.getBody().getPet().getId());
 		deleteEntity("tutor", agendamento.getBody().getPet().getTutor().getId());
-		deleteEntity("agendamento", agendamento.getBody().getId());
 	}
 
+	@Test
+	void shouldEditAgendamento(){
+		petTest.setTutor(createEntity(Tutor.class, "tutor", tutorTest).getBody());
+		agendamentoTest.setPet(createEntity(Pet.class, "pet", petTest).getBody());
+		ResponseEntity<Agendamento> agendamento = createEntity(Agendamento.class, "agendamento", agendamentoTest);
+
+		agendamento.getBody().setProcedimento(Procedimento.VACINA);
+		agendamento.getBody().setAgStatus(StatusAgendamento.FINALIZADO);
+
+		ResponseEntity<Agendamento> agendamentoEditado = editarEntidade(Agendamento.class, "agendamento", agendamento.getBody(), agendamento.getBody().getId());
+
+		assertEquals(agendamentoEditado.getStatusCode(), HttpStatus.CREATED);
+		assertEquals(agendamentoEditado.getBody().getAgStatus(), StatusAgendamento.FINALIZADO);
+		assertEquals(agendamentoEditado.getBody().getProcedimento(), Procedimento.VACINA);
+
+		deleteEntity("pet", agendamento.getBody().getPet().getId());
+		deleteEntity("tutor", agendamento.getBody().getPet().getTutor().getId());
+	}
+
+	@Test
+	void shouldReturnAgendamento(){
+
+		petTest.setTutor(createEntity(Tutor.class, "tutor", tutorTest).getBody());
+		agendamentoTest.setPet(createEntity(Pet.class, "pet", petTest).getBody());
+		ResponseEntity<Agendamento> agendamento = createEntity(Agendamento.class, "agendamento", agendamentoTest);
+
+		ResponseEntity<Agendamento> agRetornado = obterEntidade(Agendamento.class, "agendamento","/" + agendamento.getBody().getId());
+
+		assertEquals(agRetornado.getStatusCode(), HttpStatus.OK);
+		assertEquals(agRetornado.getBody().getId(), agendamento.getBody().getId());
+
+		deleteEntity("pet", agendamento.getBody().getPet().getId());
+		deleteEntity("tutor", agendamento.getBody().getPet().getTutor().getId());
+	}
+
+	@Test
+	void shouldReturnAllAgendamentos(){
+		petTest.setTutor(createEntity(Tutor.class, "tutor", tutorTest).getBody());
+		agendamentoTest.setPet(createEntity(Pet.class, "pet", petTest).getBody());
+		ResponseEntity<Agendamento> agendamento = createEntity(Agendamento.class, "agendamento", agendamentoTest);
+
+		ResponseEntity<Agendamento> agRetornado = obterEntidade(Agendamento.class, "agendamento","/" + agendamento.getBody().getId());
+		assertNotNull(agRetornado);
+
+		deleteEntity("pet", agendamento.getBody().getPet().getId());
+		deleteEntity("tutor", agendamento.getBody().getPet().getTutor().getId());
+	}
+
+	@Test
+	void shouldDeleteAgendamento(){
+		petTest.setTutor(createEntity(Tutor.class, "tutor", tutorTest).getBody());
+		agendamentoTest.setPet(createEntity(Pet.class, "pet", petTest).getBody());
+		ResponseEntity<Agendamento> agendamento = createEntity(Agendamento.class, "agendamento", agendamentoTest);
+
+		deleteEntity("pet", agendamento.getBody().getPet().getId());
+		deleteEntity("tutor", agendamento.getBody().getPet().getTutor().getId());
+		deleteEntity("agendamento", agendamento.getBody().getId());
+
+		ResponseEntity<Agendamento> agRetornado = obterEntidade(Agendamento.class, "agendamento", "/"+ agendamento.getBody().getId());
+		assertEquals(agRetornado.getStatusCode(), HttpStatus.NOT_FOUND);
+	}
 
 	private <T> ResponseEntity<T> obterEntidade(Class<T> classe, String endPoint, String parametro) {
 		return restTemplate.getForEntity(host + port + "/api/v1/"+endPoint + parametro, classe);
