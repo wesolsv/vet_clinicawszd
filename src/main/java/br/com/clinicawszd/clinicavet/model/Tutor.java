@@ -39,9 +39,9 @@ public class Tutor {
     @Column(name = "endereco")
     private String endereco;
 
-    public Tutor(Long id) {
-        this.id = id;
-    }
+//    public Tutor(Long id) {
+//        this.id = id;
+//    }
 
     public static class Builder{
         private String nome;

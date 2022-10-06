@@ -1,9 +1,12 @@
 package br.com.clinicawszd.clinicavet;
 
+import br.com.clinicawszd.clinicavet.model.Agendamento;
 import br.com.clinicawszd.clinicavet.model.Pet;
 import br.com.clinicawszd.clinicavet.model.Tutor;
 import br.com.clinicawszd.clinicavet.service.TutorService;
 import br.com.clinicawszd.clinicavet.util.Porte;
+import br.com.clinicawszd.clinicavet.util.Procedimento;
+import br.com.clinicawszd.clinicavet.util.StatusAgendamento;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
@@ -20,6 +23,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,11 +55,17 @@ class ClinicawszdApplicationTests {
 			.idade(3)
 			.porte(Porte.G)
 			.tipo("Aguia")
-			.tutor(null)
-			.build();
+			.tutor(null).build();
+
+	private static Agendamento agendamentoTest = new Agendamento.Builder()
+			.pet(null)
+			.dtCriacao(LocalDateTime.now())
+			.dtAgendamento(LocalDateTime.parse("2022-09-30T15:30:00"))
+			.procedimento(Procedimento.CASTRACAO)
+			.agStatus(StatusAgendamento.AGENDADO).build();
 
 
-	//Tutor Testes 1 ao 5
+	//Tutor Testes
 	@Test
 	void shouldCreateNewTutor(){
 		ResponseEntity<Tutor> tutor = createEntity(Tutor.class, "tutor", tutorTest);
@@ -106,9 +116,22 @@ class ClinicawszdApplicationTests {
 		assertEquals(tutor.getStatusCode(), HttpStatus.NOT_FOUND);
 	}
 
-	//Pet Testes 5 ao 8
+	//Pet Testes
+
 	@Test
-	void shouldCreateNewPet(){
+	void shouldCreatePet(){
+		petTest.setTutor(createEntity(Tutor.class, "tutor", tutorTest).getBody());
+		ResponseEntity<Pet> pet = createEntity(Pet.class, "pet", petTest);
+
+		assertEquals(pet.getStatusCode(), HttpStatus.CREATED);
+		assertNotNull(pet.getBody().getId());
+		assertEquals(pet.getBody().getIdade(), 3);
+
+		deleteEntity("pet", pet.getBody().getId());
+		deleteEntity("tutor", pet.getBody().getTutor().getId());
+	}
+	@Test
+	void shouldEditPet(){
 		petTest.setTutor(createEntity(Tutor.class, "tutor", tutorTest).getBody());
 		ResponseEntity<Pet> pet = createEntity(Pet.class, "pet", petTest);
 
@@ -120,19 +143,6 @@ class ClinicawszdApplicationTests {
 		assertEquals(pet.getStatusCode(), HttpStatus.CREATED);
 		assertEquals(pet.getBody().getIdade(), 10);
 		assertEquals(pet.getBody().getNome(), "BANANA");
-
-		deleteEntity("pet", pet.getBody().getId());
-		deleteEntity("tutor", pet.getBody().getTutor().getId());
-	}
-
-	@Test
-	void shouldCreateEditPet(){
-		petTest.setTutor(createEntity(Tutor.class, "tutor", tutorTest).getBody());
-		ResponseEntity<Pet> pet = createEntity(Pet.class, "pet", petTest);
-
-		assertEquals(pet.getStatusCode(), HttpStatus.CREATED);
-		assertNotNull(pet.getBody().getId());
-		assertEquals(pet.getBody().getIdade(), 3);
 
 		deleteEntity("pet", pet.getBody().getId());
 		deleteEntity("tutor", pet.getBody().getTutor().getId());
@@ -173,12 +183,25 @@ class ClinicawszdApplicationTests {
 		ResponseEntity<Pet> pet = obterEntidade(Pet.class, "pet", "/"+ createdPet.getBody().getId());
 		assertEquals(pet.getStatusCode(), HttpStatus.NOT_FOUND);
 	}
+	@Test
+	void shouldCreateNewAgendamento(){
+		petTest.setTutor(createEntity(Tutor.class, "tutor", tutorTest).getBody());
+		agendamentoTest.setPet(createEntity(Pet.class, "pet", petTest).getBody());
+		ResponseEntity<Agendamento> agendamento = createEntity(Agendamento.class, "agendamento", agendamentoTest);
+
+		assertEquals(agendamento.getStatusCode(), HttpStatus.CREATED);
+		assertEquals(agendamento.getBody().getAgStatus(), StatusAgendamento.AGENDADO);
+		assertEquals(agendamento.getBody().getProcedimento(), Procedimento.CASTRACAO);
+
+		deleteEntity("pet", agendamento.getBody().getPet().getId());
+		deleteEntity("tutor", agendamento.getBody().getPet().getTutor().getId());
+		deleteEntity("agendamento", agendamento.getBody().getId());
+	}
 
 
 	private <T> ResponseEntity<T> obterEntidade(Class<T> classe, String endPoint, String parametro) {
 		return restTemplate.getForEntity(host + port + "/api/v1/"+endPoint + parametro, classe);
 	}
-
 	private <T, U> ResponseEntity<T> createEntity(Class<T> classe, String endPoint, U request) {
 		return restTemplate.postForEntity(host + port + "/api/v1/" + endPoint, request, classe);
 	}
@@ -188,7 +211,6 @@ class ClinicawszdApplicationTests {
 		return restTemplate.exchange(host + port + "/api/v1/"+ endPoint +"/{id}",
 				HttpMethod.PUT, new HttpEntity<U>(request, headers), classe, id);
 	}
-
 	private void deleteEntity(String endPoint, Long id) {
 		restTemplate.delete(host + port + "/api/v1/" + endPoint + "/" + id);
 	}

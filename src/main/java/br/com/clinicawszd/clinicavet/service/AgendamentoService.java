@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 @Slf4j
 @Service
@@ -20,9 +21,16 @@ public class AgendamentoService {
 
     public Agendamento createdNewAg(Agendamento novo) {
         log.info("Criando novo Agendamento");
-        Agendamento ag;
+
+        Agendamento ag = new Agendamento.Builder()
+                .pet(novo.getPet())
+                .dtCriacao(LocalDateTime.now())
+                .dtAgendamento(novo.getDtAgendamento())
+                .procedimento(novo.getProcedimento())
+                .agStatus(StatusAgendamento.AGENDADO)
+                .build();
         try{
-            ag = repository.save(novo);
+           repository.save(ag);
         }catch (BadRequestException e){
             throw new BadRequestException("Falha ao criar Agendamento, verifique o payload");
         }
