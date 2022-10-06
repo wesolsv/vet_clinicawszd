@@ -25,12 +25,21 @@ public class PetService {
     public Pet createNewPt(Pet novo) {
        log.info("Adiciona novo pet!");
 
-       try{
-           List<Agendamento> lista = new ArrayList<>(novo.getAgendamentos());
+       List<Agendamento> lista = null;
 
-           if(!lista.isEmpty()){
-               novo.getAgendamentos().clear();
-               Pet pet = repository.save(novo);
+       if(novo.getAgendamentos() != null) {
+           lista = new ArrayList<>(novo.getAgendamentos());
+       }
+
+        Pet pet = new Pet.Builder()
+                .nome(novo.getNome())
+                .idade(novo.getIdade())
+                .porte(novo.getPorte())
+                .tipo(novo.getTipo())
+                .tutor(novo.getTutor()).build();
+       try{
+           if(lista != null && !lista.isEmpty()){
+               repository.save(pet);
                for(Agendamento ag : lista){
                    ag.setPet(pet);
                    agendamentoRepository.save(ag);

@@ -44,4 +44,44 @@ public class Pet {
     @JsonIgnoreProperties("pet")
     private List<Agendamento> agendamentos;
 
+    public static class Builder{
+        private String nome;
+        private Integer idade;
+        private Porte porte;
+        private String tipo;
+        private Tutor tutor;
+
+        public Pet.Builder nome(String nome){
+            this.nome = nome;
+            return this;
+        }
+        public Pet.Builder idade(Integer idade){
+            this.idade = idade;
+            return this;
+        }
+        public Pet.Builder porte(Porte porte){
+            this.porte = porte;
+            return this;
+        }
+        public Pet.Builder tipo(String tipo){
+            this.tipo = tipo;
+            return this;
+        }
+        public Pet.Builder tutor(Tutor tutor) {
+            this.tutor = tutor;
+            return this;
+        }
+
+        public Pet build() {
+            return new Pet(this);
+        }
+    }
+
+    private Pet(Pet.Builder builder){
+        nome = builder.nome;
+        idade = builder.idade;
+        porte = builder.porte;
+        tipo = builder.tipo;
+        tutor = builder.tutor;
+    }
 }
