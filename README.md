@@ -13,14 +13,14 @@ Para executar o projeto: mvn spring-boot:run
 * GET  /api/v1/tutor      - Retorna uma lista de tutores
 * GET  /api/v1/tutor/{id} - Retorna um tutor
 * POST /api/v1/tutor      - Adiciona um tutor
-* PUT  /api/v1/tutor      - Altera um tutor
+* PUT  /api/v1/tutor/{id} - Altera um tutor
 * DEL  /api/v1/tutor/{id} - Deleta um Tutor
 
 ### Pet
 * GET  /api/v1/pet      - Retorna uma lista de pets
 * GET  /api/v1/pet/{id} - Retorna um pet
 * POST /api/v1/pet      - Adiciona um pet
-* PUT  /api/v1/pet      - Altera um pet
+* PUT  /api/v1/pet/{id} - Altera um pet
 * DEL  /api/v1/pet/{id} - Deleta um pet
 
 ### Agendamento
@@ -28,6 +28,6 @@ Para executar o projeto: mvn spring-boot:run
 * GET  /api/v1/agendamento/{id}     - Retorna um agendamento
 * GET  /api/v1/agendamento/ano/mes  - Retorna uma lista de agendamentos por ano e mês
 * POST /api/v1/agendamento          - Adiciona um agendamento
-* PUT  /api/v1/agendamento          - Altera um agendamento
-* PATC /api/v1/agendamento          - Altera o status de um agendamento
+* PUT  /api/v1/agendamento/{id}     - Altera um agendamento
+* PATC /api/v1/agendamento/{id}     - Altera o status de um agendamento
 * DEL  /api/v1/agendamento/{id}     - Deleta um agendamento (Desabilitado)
